@@ -1,0 +1,97 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2022-11-25 13:48
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: HP
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+CREATE SCHEMA IF NOT EXISTS `miHotel` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE IF NOT EXISTS `miHotel`.`Usuario` (
+  `Codigo` NVARCHAR(20) NOT NULL,
+  `Nombre` NVARCHAR(50) NOT NULL,
+  `Clave` NVARCHAR(120) NOT NULL,
+  `Correo` NVARCHAR(45) NULL,
+  `EstaActivo` TINYINT(4) NULL DEFAULT NULL,
+  PRIMARY KEY (`Codigo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `miHotel`.`Habitacion` (
+  `Codigo` INT(11) NOT NULL,
+  `Nombre` NVARCHAR(50) NOT NULL,
+  `Descripcion` NVARCHAR(120) NOT NULL,
+  `TipoHabitacion` NVARCHAR(50) NOT NULL,
+  `Existencia` INT(11) NOT NULL,
+  `Precio` DECIMAL(8,2) NOT NULL,
+  `FechaCreacion` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`Codigo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `miHotel`.`Cliente` (
+  `Identidad` NVARCHAR(30) NOT NULL,
+  `Nombre` NVARCHAR(60) NOT NULL,
+  `Direccion` NVARCHAR(100) NOT NULL,
+  `Email` NVARCHAR(60) NULL,
+  `Telefono` NVARCHAR(20) NOT NULL,
+  PRIMARY KEY (`Identidad`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `miHotel`.`Factura` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdentidadCliente` NVARCHAR(30) NOT NULL,
+  `Fecha` DATETIME NOT NULL,
+  `CodigoUsuario` NVARCHAR(20) NOT NULL,
+  `ISV` DECIMAL(8,2) NULL DEFAULT NULL,
+  `Descuento` DECIMAL(8,2) NULL DEFAULT NULL,
+  `SubTotal` DECIMAL(8,2) NULL DEFAULT NULL,
+  `Total` DECIMAL(8,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `FK_Factura_Cliente_idx` (`IdentidadCliente` ASC) VISIBLE,
+  INDEX `FK_Factura_Usuario_idx` (`CodigoUsuario` ASC) VISIBLE,
+  CONSTRAINT `FK_Factura_Cliente`
+    FOREIGN KEY (`IdentidadCliente`)
+    REFERENCES `miHotel`.`Cliente` (`Identidad`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_Factura_Usuario`
+    FOREIGN KEY (`CodigoUsuario`)
+    REFERENCES `miHotel`.`Usuario` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `miHotel`.`DetalleFactura` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdFactura` INT(11) NOT NULL,
+  `CodigoHabitacion` INT(11) NOT NULL,
+  `Precio` DECIMAL(8,2) NULL DEFAULT NULL,
+  `Cantidad` INT(11) NULL DEFAULT NULL,
+  `Total` DECIMAL(8,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `FK_DetalleFactura_Factura_idx` (`IdFactura` ASC) VISIBLE,
+  INDEX `FK_DetalleFactura_Habitacion_idx` (`CodigoHabitacion` ASC) VISIBLE,
+  CONSTRAINT `FK_DetalleFactura_Factura`
+    FOREIGN KEY (`IdFactura`)
+    REFERENCES `miHotel`.`Factura` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_DetalleFactura_Habitacion`
+    FOREIGN KEY (`CodigoHabitacion`)
+    REFERENCES `miHotel`.`Habitacion` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
