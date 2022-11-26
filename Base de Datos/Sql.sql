@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2022-11-25 13:48
+-- Generated: 2022-11-25 19:03
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS `miHotel`.`Usuario` (
   `Nombre` NVARCHAR(50) NOT NULL,
   `Clave` NVARCHAR(120) NOT NULL,
   `Correo` NVARCHAR(45) NULL,
-  `EstaActivo` TINYINT(4) NULL DEFAULT NULL,
+  `EstaActivo` TINYINT(4) NOT NULL,
+  `Rol` NVARCHAR(20) NOT NULL,
   PRIMARY KEY (`Codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -28,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `miHotel`.`Habitacion` (
   `TipoHabitacion` NVARCHAR(50) NOT NULL,
   `Existencia` INT(11) NOT NULL,
   `Precio` DECIMAL(8,2) NOT NULL,
-  `FechaCreacion` DATETIME NULL DEFAULT NULL,
+  `FechaCreacion` DATETIME NOT NULL,
+  `Imagen` LONGBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`Codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
