@@ -8,7 +8,7 @@ namespace Modelos
 {
     public class Usuario
     {
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Clave { get; set; }
         public string? Correo { get; set; }
