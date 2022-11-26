@@ -22,7 +22,7 @@ namespace Hotel.Controllers
         }
 
         [HttpPost("/account/login")]
-        
+
         public async Task<IActionResult> Login(Login login)
 
         {
@@ -33,7 +33,7 @@ namespace Hotel.Controllers
 
                 if (usuarioValido)
                 {
-                    Usuario user = await _usuarioRepositorio.GetPorCodigo(login.Usuario);
+                    Usuario user = await _usuarioRepositorio.GetPorCodigo(login.Codigo);
 
                     if (user.EstaActivo)
                     {
@@ -41,7 +41,7 @@ namespace Hotel.Controllers
 
                         var claims = new[]
                         {
-                            new Claim(ClaimTypes.Name, user.Codigo),
+                           // new Claim(ClaimTypes.Name, user.Codigo),
                             new Claim(ClaimTypes.Role, rol)
                         };
 

@@ -9,7 +9,7 @@ namespace Modelos
     public class Login
     {
         //Solo tendremos 2 propiedades (Codigo de usuario y clave)
-        public string Usuario { get; set; }
+        public string Codigo { get; set; }
         public string Clave { get; set; }
 
     }
