@@ -42,7 +42,7 @@ namespace Hotel.Controllers
                         var claims = new[]
                         {
                             //Codigo para iniciar sesion
-                           // new Claim(ClaimTypes.Name, user.Codigo),
+                            new Claim(ClaimTypes.Name, user.Codigo),
                             new Claim(ClaimTypes.Role, rol)
                         };
 
