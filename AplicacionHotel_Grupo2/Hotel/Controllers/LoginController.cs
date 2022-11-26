@@ -22,15 +22,18 @@ namespace Hotel.Controllers
         }
 
         [HttpPost("/account/login")]
+        
         public async Task<IActionResult> Login(Login login)
+
         {
             string rol = string.Empty;
             try
             {
                 bool usuarioValido = await _loginRepositorio.ValidarUsuario(login);
+
                 if (usuarioValido)
                 {
-                    Usuario user = await _usuarioRepositorio.GetPorCodigo(login.Codigo);
+                    Usuario user = await _usuarioRepositorio.GetPorCodigo(login.Usuario);
 
                     if (user.EstaActivo)
                     {
