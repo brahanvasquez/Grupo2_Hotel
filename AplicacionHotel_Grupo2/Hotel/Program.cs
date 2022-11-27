@@ -1,4 +1,4 @@
-
+using CurrieTechnologies.Razor.SweetAlert2;
 using Datos.Interfaces;
 using Hotel;
 using Hotel.Interfaces;
@@ -20,7 +20,7 @@ builder.Services.AddScoped<ILoginServicio, LoginServicio>();
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
-
+builder.Services.AddSweetAlert2();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

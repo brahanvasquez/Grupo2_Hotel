@@ -1,11 +1,17 @@
 ﻿@page "/Usuarios"
 @using Modelos
+
 <AuthorizeView Roles="Administrador">
     <Authorized Context="AuthenticationState">
-        <h2> Lista de Usuarios </h2>
-        @if(lista == null)
+        <h2>Lista de Usuarios</h2>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <a href="/Usuarios/Nuevo" class="btn btn-primary m-1">Nuevo Usuario</a>
+            </div>
+        </div>
+        @if (lista == null)
         {
-            <p> No existe usuario en el sistema </p>
+            <p>No existen usuarios en el sistema</p>
         }
         else
         {
@@ -20,9 +26,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(Usuario user in lista)
+                    @foreach (Usuario user in lista)
                     {
-                            <tr>
+                        @if (user.Rol == "Administrador")
+                        {
+                            <tr style="background-color:beige;">
                                 <td>@user.Codigo</td>
                                 <td>@user.Nombre</td>
                                 <td>@user.Correo</td>
@@ -30,7 +38,7 @@
                                 @if (user.EstaActivo)
                                 {
                                     <td>
-                                        <span class="oi oi-circle-check" style="color:aqua;"></span>
+                                        <span class="oi oi-circle-check" style="color:green;"></span>
                                     </td>
                                 }
                                 else
@@ -39,9 +47,37 @@
                                         <span class="oi oi-circle-x" style="color:red;"></span>
                                     </td>
                                 }
+                                <td>
+                                    <a class="btn btn-success" href="@($"/Usuarios/Editar/{user.Codigo}")"> Editar</a>
+                                </td>
                             </tr>
                         }
-                </tbody>                   
+                        else
+                        {
+                            <tr>
+                                <td>@user.Codigo</td>
+                                <td>@user.Nombre</td>
+                                <td>@user.Correo</td>
+                                <td>@user.Rol</td>
+                                @if (user.EstaActivo)
+                                {
+                                    <td>
+                                        <span class="oi oi-circle-check" style="color:green;"></span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="oi oi-circle-x" style="color:red;"></span>
+                                    </td>
+                                }
+                                <td>
+                                    <a class="btn btn-success" href="@($"/Usuarios/Editar/{user.Codigo}")"> Editar</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         }
     </Authorized>
