@@ -1,0 +1,47 @@
+﻿@page "/Clientes"
+@using Modelos
+
+<AuthorizeView>
+    <Authorized Context="AuthenticationState">
+        <h2>Lista de CLientes</h2>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <a href="/Clientes/Nuevo" class="btn btn-primary m-1">Nuevo Cliente</a>
+            </div>
+        </div>
+        @if (lista == null)
+        {
+            <p>No existen clientes en el sistema</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Identidad</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Cliente user in lista)
+                    {
+                        
+                        
+                            <tr style="background-color:beige;">
+                                <td>@user.Identidad</td>
+                                <td>@user.Nombre</td>
+                                <td>@user.Direccion</td>
+                                <td>@user.Telefono</td>
+                               
+    
+                            </tr>
+                 
+                    }
+                </tbody>
+            </table>
+        }
+    </Authorized>
+</AuthorizeView>
