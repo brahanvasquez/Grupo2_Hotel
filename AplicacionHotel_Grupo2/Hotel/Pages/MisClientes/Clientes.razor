@@ -1,7 +1,7 @@
 ﻿@page "/Clientes"
 @using Modelos
 
-<AuthorizeView>
+<AuthorizeView Roles="Administrador">
     <Authorized Context="AuthenticationState">
         <h2>Lista de CLientes</h2>
         <div class="form-group row">
@@ -24,6 +24,7 @@
                         <th>Email</th>
                         <th>Telefono</th>
                     </tr>
+               
                 </thead>
                 <tbody>
                     @foreach (Cliente user in lista)
@@ -34,11 +35,15 @@
                                 <td>@user.Identidad</td>
                                 <td>@user.Nombre</td>
                                 <td>@user.Direccion</td>
+                                <td>@user.Email</td>
                                 <td>@user.Telefono</td>
-                               
-    
-                            </tr>
-                 
+
+                            <td>
+                                <a class="btn btn-success" href="@($"/Clientes/Editar/{user.Identidad}")"> Editar</a>
+                            </td>
+
+                        </tr>
+                    
                     }
                 </tbody>
             </table>

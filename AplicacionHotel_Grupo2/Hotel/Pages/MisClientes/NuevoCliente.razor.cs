@@ -15,8 +15,7 @@ namespace Hotel.Pages.MisClientes
 
         protected async void Guardar()
         {
-            if (string.IsNullOrEmpty(user.Identidad) || string.IsNullOrEmpty(user.Nombre)
-                || string.IsNullOrEmpty(user.Direccion) || string.IsNullOrEmpty(user.Telefono))
+            if (string.IsNullOrEmpty(user.Identidad) || string.IsNullOrEmpty(user.Nombre) || string.IsNullOrEmpty(user.Direccion) || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Telefono))
             {
                 return;
             }

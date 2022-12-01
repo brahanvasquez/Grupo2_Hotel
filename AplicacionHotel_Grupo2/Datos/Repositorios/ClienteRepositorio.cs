@@ -30,7 +30,7 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"UPDATE Cliente SET Nombre = @Nombre,Direccion= @Direccion,Email= @Email,
+                string sql = @"UPDATE cliente SET Nombre = @Nombre,Direccion= @Direccion,Email= @Email,
                              Telefono=@Telefono WHERE Identidad=@Identidad;";
                 resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, cliente));
             }
@@ -41,15 +41,15 @@ namespace Datos.Repositorios
             return resultado;
         }
 
-        public async Task<bool> Eliminar(string identidad)
+        public async Task<bool> Eliminar(string Identidad)
         {
             bool resultado = false;
             try
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"DELETE FROM Cliente WHERE Identidad=@Identidad;";
-                resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, new { identidad }));
+                string sql = @"DELETE FROM cliente WHERE Identidad=@Identidad;";
+                resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, new { Identidad }));
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = "SELECT * FROM Cliente;";
+                string sql = "SELECT * FROM cliente;";
                 lista = await conexion.QueryAsync<Cliente>(sql);
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = "SELECT * FROM Cliente WHERE Identidad = @Identidad; ";
+                string sql = "SELECT * FROM cliente WHERE Identidad = @Identidad; ";
 
                 cli = await conexion.QueryFirstAsync<Cliente>(sql, new { Identidad });
             }
@@ -100,7 +100,7 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"INSERT INTO Cliente (Identidad,Nombre,Direcccion,Email,Telefono) 
+                string sql = @"INSERT INTO cliente (Identidad,Nombre,Direccion,Email,Telefono) 
                                 VALUES (@Identidad,@Nombre,@Direccion,@Email,@Telefono);";
                 resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, cliente));
             }
