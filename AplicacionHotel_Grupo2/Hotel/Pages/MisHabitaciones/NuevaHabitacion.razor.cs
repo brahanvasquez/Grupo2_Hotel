@@ -12,6 +12,7 @@ namespace Hotel.Pages.MisHabitaciones
         private Habitacion hab= new Habitacion();
         [Inject] private SweetAlertService Swal { get; set; }
         [Inject] NavigationManager _navigationManager { get; set; }
+
         string imgUrl = string.Empty;
 
         private async Task SeleccionarImagen(InputFileChangeEventArgs e)
@@ -32,6 +33,7 @@ namespace Hotel.Pages.MisHabitaciones
             }
             hab.FechaCreacion = DateTime.Now;
             Habitacion habitacionExistente = new Habitacion();
+
             habitacionExistente = await habitacionServicio.GetPorCodigo(hab.Codigo);
 
             if (habitacionExistente != null)
@@ -39,8 +41,10 @@ namespace Hotel.Pages.MisHabitaciones
                 if (!string.IsNullOrEmpty(habitacionExistente.Codigo.ToString()))
                 {
                     await Swal.FireAsync("Advertencia", "Ya existe una habitacion con este codigo", SweetAlertIcon.Warning);
+                    
                 }
             }
+
             bool inserto = await habitacionServicio.Nuevo(hab);
             if (inserto)
             {
