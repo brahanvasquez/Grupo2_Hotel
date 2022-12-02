@@ -36,9 +36,9 @@ namespace Hotel.Servicios
             return await habitacionRepositorio.GetPorCodigo(codigo);
         }
 
-        public Task<bool> Nuevo(Habitacion habitacion)
+        public async Task<bool> Nuevo(Habitacion habitacion)
         {
-            return habitacionRepositorio.Nuevo(habitacion);
+            return await habitacionRepositorio.Nuevo(habitacion);
         }
     }
 }

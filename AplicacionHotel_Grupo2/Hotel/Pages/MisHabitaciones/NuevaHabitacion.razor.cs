@@ -41,11 +41,12 @@ namespace Hotel.Pages.MisHabitaciones
                 if (!string.IsNullOrEmpty(habitacionExistente.Codigo.ToString()))
                 {
                     await Swal.FireAsync("Advertencia", "Ya existe una habitacion con este codigo", SweetAlertIcon.Warning);
-                    
+                    return;
                 }
             }
 
             bool inserto = await habitacionServicio.Nuevo(hab);
+
             if (inserto)
             {
                 await Swal.FireAsync("Felicidades", "Habitacion guardada con exito", SweetAlertIcon.Success);
@@ -56,7 +57,7 @@ namespace Hotel.Pages.MisHabitaciones
                 await Swal.FireAsync("Error", "Habitacion no se pudo guardar", SweetAlertIcon.Error);
             }
         }
-        protected void Cancelar()
+        protected async Task Cancelar()
         {
             _navigationManager.NavigateTo("/Habitaciones");
         }
