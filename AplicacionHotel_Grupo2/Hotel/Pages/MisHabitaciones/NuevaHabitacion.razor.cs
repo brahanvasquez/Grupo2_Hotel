@@ -38,7 +38,7 @@ namespace Hotel.Pages.MisHabitaciones
 
             if (habitacionExistente != null)
             {
-                if (!string.IsNullOrEmpty(habitacionExistente.Codigo.ToString()))
+                if (habitacionExistente.Codigo != 0)
                 {
                     await Swal.FireAsync("Advertencia", "Ya existe una habitacion con este codigo", SweetAlertIcon.Warning);
                     return;
