@@ -7,16 +7,16 @@ namespace Datos.Repositorios
 {
     public class FacturaRepositorio : IFacturaRepositorio
     {
-        private string CadenaConexon;
+        private string CadenaConexion;
 
         public FacturaRepositorio(string _cadenaConexion)
         {
-            CadenaConexon = _cadenaConexion;
+            CadenaConexion = _cadenaConexion;
         }
 
         private MySqlConnection Conexion()
         {
-            return new MySqlConnection(CadenaConexon);
+            return new MySqlConnection(CadenaConexion);
         }
 
         public async Task<int> Nueva(Factura factura)
@@ -35,5 +35,22 @@ namespace Datos.Repositorios
             }
             return idFactura;
         }
-    }
+
+		public async Task<IEnumerable<Factura>> GetLista()
+		{
+			IEnumerable<Factura> lista = new List<Factura>();
+			try
+			{
+				using MySqlConnection conexion = Conexion();
+				await conexion.OpenAsync();
+				string sql = "SELECT * FROM factura;";
+				lista = await conexion.QueryAsync<Factura>(sql);
+			}
+			catch (Exception ex)
+			{
+
+			}
+			return lista;
+		}
+	}
 }

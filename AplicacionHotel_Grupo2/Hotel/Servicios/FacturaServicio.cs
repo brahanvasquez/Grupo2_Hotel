@@ -16,7 +16,12 @@ namespace Hotel.Servicios
             facturaRepositorio = new FacturaRepositorio(config.CadenaConexion);
         }
 
-        public async Task<int> Nueva(Factura factura)
+		public async Task<IEnumerable<Factura>> GetLista()
+		{
+			return await facturaRepositorio.GetLista();
+		}
+
+		public async Task<int> Nueva(Factura factura)
         {
             return await facturaRepositorio.Nueva(factura);
         }

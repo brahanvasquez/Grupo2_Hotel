@@ -7,16 +7,16 @@ namespace Datos.Repositorios
 {
     public class DetalleFacturaRepositorio : IDetalleFacturaRepositorio
     {
-        private string CadenaConexon;
+        private string CadenaConexion;
 
         public DetalleFacturaRepositorio(string _cadenaConexion)
         {
-            CadenaConexon = _cadenaConexion;
+            CadenaConexion = _cadenaConexion;
         }
 
         private MySqlConnection Conexion()
         {
-            return new MySqlConnection(CadenaConexon);
+            return new MySqlConnection(CadenaConexion);
         }
 
         public async Task<bool> Nuevo(DetalleFactura detalleFactura)
