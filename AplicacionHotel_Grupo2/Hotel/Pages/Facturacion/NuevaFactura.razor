@@ -31,8 +31,8 @@
 					</div>
 
 					<div class="col-sm-6">
-						<b>Descripción:</b>
-						<InputText readonly id="Descripcion" class="form-control" @bind-Value="@habitacion.Descripcion" />
+						<b>Nombre:</b>
+						<InputText readonly id="Descripcion" class="form-control" @bind-Value="@habitacion.Nombre" />
 					</div>
 
 					<div class="col-sm-2">
@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="col-sm-1">
-						<b>Agregar:</b>
+						<b></b>
 						<input type="submit" class="btn btn-primary" value="Agregar" @onclick="@AgregarHabitacion" />
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 				<thead>
 					<tr>
 						<th>Código</th>
-						<th>Producto</th>
+						<th>Habitación</th>
 						<th>Cantidad</th>
 						<th>Precio</th>
 						<th>Total</th>

@@ -26,8 +26,8 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"INSERT INTO detallefactura (IdFactura, CodigoHabitacion, Habitacion, Precio, Cantidad, Total) 
-                               VALUES (@IdFactura, @CodigoHabitacion, @Habitacion, @Precio, @Cantidad, @Total);";
+                string sql = @"INSERT INTO detallefactura (IdFactura, CodigoHabitacion, Precio, Cantidad, Total) 
+                               VALUES (@IdFactura, @CodigoHabitacion, @Precio, @Cantidad, @Total);";
                 inserto = Convert.ToBoolean(await conexion.ExecuteAsync(sql, detalleFactura));
             }
             catch (Exception ex)

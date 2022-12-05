@@ -6,6 +6,7 @@ using Hotel.Servicios;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +21,10 @@ builder.Services.AddScoped<ILoginServicio, LoginServicio>();
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
 builder.Services.AddScoped<IHabitacionServicio, HabitacionServicio>();
 builder.Services.AddScoped<IClienteServicio, ClienteServicio>();
-
+builder.Services.AddScoped<IFacturaServicio, FacturaServicio>();
+builder.Services.AddScoped<IDetalleFacturaServicio, DetalleFacturaServicio>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSweetAlert2();
 var app = builder.Build();
 

@@ -37,7 +37,7 @@ namespace Hotel.Pages.Facturacion
                 if (habitacion != null)
                 {
                     DetalleFactura detalle = new DetalleFactura();
-                    detalle.Habitacion = habitacion.Descripcion;
+                    detalle.Habitacion = habitacion.Nombre;
                     detalle.CodigoHabitacion = habitacion.Codigo;
                     detalle.Cantidad = Convert.ToInt32(cantidad);
                     detalle.Precio = habitacion.Precio;
@@ -45,7 +45,7 @@ namespace Hotel.Pages.Facturacion
                     listaDetalleFactura.Add(detalle);
 
                     habitacion.Codigo = 0;
-                    habitacion.Descripcion = string.Empty;
+                    habitacion.Nombre = string.Empty;
                     habitacion.Precio = 0;
                     habitacion.Existencia = 0;
                     cantidad = 0;
